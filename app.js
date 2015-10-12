@@ -4,6 +4,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var app = express();
 
+var port = 8000;
+
 //enabling cors
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -25,4 +27,5 @@ app.use(function(req, res, next){
 	res.status(404).send('Page not found');
 })
 
-app.listen(8000);
+app.listen(port);
+console.log('Server listen on : ' + port)
