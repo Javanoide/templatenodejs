@@ -1,8 +1,8 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-module.exports = require('./env/' + process.env.NODE_ENV + '.js');
+var ENV = require('./env/' + process.env.NODE_ENV + '.js');
+
+var port = ENV.port;
 
 module.exports = function(){
 	var app = express();
@@ -13,8 +13,11 @@ module.exports = function(){
 	  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	  next();
 	});
-	
+
 	require('../routes/routes.js')(app);
-	
+
+	app.listen(port);
+	console.log('Server listen on : ' + port);
+
 	return app;
 }
